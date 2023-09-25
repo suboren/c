@@ -1,0 +1,44 @@
+weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
+Dict1 = {
+    'Monday': ['0', '0', '0', '0', '計算物理', '計算物理', '0', '0', '0'],
+    'Tuesday': ['0', '0', '光學/量物', '光學/量物', '高等應數', '高等應數', '熱物', '熱物', '0'],
+    'Wednesday': ['電子學單', '電子學單', '高等應數/熱物', '高等應數/熱物', '0', '0', '系會', '系會', '0', '理論物理', '理論物理', '理論物理'],
+    'Thursday': ['0', '0', '電子學', '電子學', '計算物理', '計算物理', '電子學實驗', '電子學實驗', '電子學實驗'],
+    'Friday': ['0', '0', '量物', '量物', '光學', '光學', '0', '0', '0']
+}
+
+Dict2 = {
+    '計算物理': {'教師': '林之淵教授', '課程資訊': 'Python code '},
+    '電子學實驗': {'教師': '陳秋民教授', '課程資訊': '電子學實驗助教，很認真'},
+    '光學': {'教師': '黃依萍教授', '課程資訊': '光學'},
+    '量物': {'教師': '吳恭德教授', '課程資訊': '一半一半'},
+    '高等應數': {'教師': '任慶運教授', '課程資訊': '應數 pro '},
+    '熱物': {'教師': '任慶運教授', '課程資訊': 'PowerPoint讚'},
+    '電子學': {'教師': '陳秋民教授', '課程資訊': '電子儀表 last year'},
+    '理論物理': {'教師': '巫俊賢教授', '課程資訊': '教授好?'},
+}
+
+day = input("請輸入星期：")      # 例如：Mon
+period = int(input("請輸入節次："))  # 1到9
+
+# Check if the input day is valid and adjust the input format
+if day in weekdays and 1 <= period <= 9:
+    # Adjust the input day to match the keys in Dict1
+    adjusted_day = day if day != 'Wednesday' else 'Wednesday'
+    courses = Dict1[adjusted_day]
+    
+    if len(courses) >= period:
+        course = courses[period - 1]
+        if course in Dict2:
+            course_info = Dict2[course]
+            teacher = course_info['教師']
+            course_description = course_info['課程資訊']
+            print(f'{day} / 第{period}節課程：{course} / 教師：{teacher}')
+            print(f'課程資訊：{course_description}')
+        else:
+            print("無教師信息")
+    else:
+        print("無課程")
+else:
+    print("無課程")
